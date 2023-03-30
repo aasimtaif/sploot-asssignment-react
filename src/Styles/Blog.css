@@ -1,6 +1,7 @@
 .blog-card{
     margin: auto;
     padding: 1rem;
-
-
+}
+a{
+    text-decoration: none;
 }

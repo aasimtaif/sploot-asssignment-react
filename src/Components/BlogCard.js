@@ -10,14 +10,14 @@ function BlogCard({ blog }) {
     return (
         <div className="blog-card">
             <Card sx={{ maxWidth: 345 }}>
-                <a>
-                <CardMedia
-                    sx={{ height: 140 }}
-                    image={blog.imageUrl}
-                    title="green iguana"
-                />
-                </a>
-               
+                <a href={blog.redirectUrl} target="_blank"> 
+                    <CardMedia
+                        sx={{ height: 140 }}
+                        image={blog.imageUrl}
+                        title="green iguana"
+                    />
+                
+
                 <CardContent>
                     <Typography gutterBottom variant="h8" component="div">
                         {blog.title}
@@ -26,6 +26,7 @@ function BlogCard({ blog }) {
                         {blog.description}
                     </Typography>
                 </CardContent>
+                </a>
             </Card>
         </div>
     )

@@ -6,11 +6,11 @@ import { Login,Blogs } from './Pages';
 
 function App() {
   const navigate = useNavigate()
-  useEffect(() => {
-  navigate("/blogs/weekend-reads")
+  // useEffect(() => {
+  // navigate("/blogs/weekend-reads")
   
    
-  }, []);
+  // }, []);
   return (
     <div className="App">
 <Routes>
