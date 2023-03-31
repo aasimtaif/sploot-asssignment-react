@@ -3,13 +3,14 @@ import axios from 'axios';
 import { useSelector, useDispatch } from 'react-redux'
 import { storeToken, storeUser } from '../redux/UserLogin';
 import { useNavigate } from 'react-router-dom';
+import "../Styles/Login.css"
 
 function Login() {
   const BASE_URL = 'https://api-staging-v2.sploot.space/api/v2/'
   const navigate = useNavigate()
   const dispatch = useDispatch();
-  const { token,user } = useSelector((state) => state.user)
-  // console.log(token, user)
+  const { token, user } = useSelector((state) => state.user)
+  console.log(token)
   const [input, setInput] = useState();
 
   const config = {
@@ -36,6 +37,7 @@ function Login() {
     setInput({ ...input, [name]: value })
 
   }
+
   const handleSubmit = async () => {
     try {
       console.log('sending')
@@ -51,15 +53,23 @@ function Login() {
   return (
     <div>
 
+      <div className="login-page">
+        <div className="form">
+          <form className="login-form">
+            <input type="email" name="username" placeholder="Email" onChange={(e) => { handleInput(e) }} />
 
+            <input type="password" placeholder="Password" name="password" onChange={(e) => { handleInput(e) }} />
+            <button type="button" onClick={handleSubmit}>Login</button>
+          </form>
+        </div>
+      </div>
 
-      Email:
+      {/* 
       <input type="email" name="username" onChange={(e) => { handleInput(e) }} />
-      <br />
-      Password:
+   
       <input type="password" name="password" onChange={(e) => { handleInput(e) }} />
       <br />
-      <button type="button" onClick={handleSubmit}>Login</button>
+      <button type="button" onClick={handleSubmit}>Login</button> */}
 
     </div>
   )

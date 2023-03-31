@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
+import { useSelector } from 'react-redux';
 import "../Styles/Categories.css"
 import { useNavigate } from 'react-router-dom';
 
@@ -7,7 +8,8 @@ function Categories() {
     const navigate = useNavigate();
     const [categories, setCategories] = useState([])
     const APIURL = "https://api-staging-v2.sploot.space/api/v2/cms/post-categories"
-    const token = " eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NDE1YzNlMmVjMTBiZjgyNTRmZjkyYWUiLCJ1c2VyUm9sZSI6IlVTRVIiLCJpYXQiOjE2ODAxMjY4OTIsImV4cCI6MTY4MDk5MDg5Mn0.SY7tDbyxd52bZNBEtIxULnZFdSe5ElyGA3sNc9MscUNw4fpNl-STE2ZsCyKfr01ncIvf1MGehGPQOMa7TgeH5w"
+    const { token } = useSelector((state) => state.user)
+console.log(token)
     const config = {
         headers: {
             Authorization: `Bearer ${token}`
@@ -19,7 +21,7 @@ function Categories() {
                 const response = await axios.get(APIURL, config)
                 // console.log(response.data.data.data)
                 setCategories(response.data.data.data)
-            }catch{
+            } catch {
                 console.log("error")
             }
 
