@@ -3,6 +3,6 @@ import userReducer from '../redux/UserLogin'
 
 export const store = configureStore({
   reducer: {
-    user: userReducer ,
+    user: userReducer,
   },
 })

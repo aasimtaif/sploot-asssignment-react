@@ -1,16 +1,15 @@
-import { Route, Routes, useNavigate} from 'react-router-dom';
-import React, { useState, useEffect } from 'react'
-
+import { Route, Routes, } from 'react-router-dom';
+import React from 'react'
+import { useDispatch ,useSelector} from 'react-redux';
+import { logOut } from './redux/UserLogin';
 import './App.css';
 import { Login,Blogs } from './Pages';
 
 function App() {
-  const navigate = useNavigate()
-  // useEffect(() => {
-  // navigate("/blogs/weekend-reads")
-  
-   
-  // }, []);
+  const {user} = useSelector((state) => state.user)
+  console.log(user)
+  const dispatch = useDispatch()
+
   return (
     <div className="App">
 <Routes>
@@ -18,6 +17,9 @@ function App() {
   <Route path="/blogs/:slug/" Component={Blogs}/>
 
 </Routes>
+{user?<button type="button" onClick = {()=>dispatch(logOut())}>LogOut</button>:""}
+
+
     </div>
   );
 }

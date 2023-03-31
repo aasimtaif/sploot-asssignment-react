@@ -1,16 +1,16 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios';
 import { useSelector, useDispatch } from 'react-redux'
-import { storeToken,storeUser } from '../redux/UserLogin';
+import { storeToken, storeUser } from '../redux/UserLogin';
+import { useNavigate } from 'react-router-dom';
 
 function Login() {
   const BASE_URL = 'https://api-staging-v2.sploot.space/api/v2/'
+  const navigate = useNavigate()
   const dispatch = useDispatch();
-  const state = useSelector((state) => state.user)
-  const {token,user} = state 
-  console.log(token,user)
+  const { token,user } = useSelector((state) => state.user)
+  // console.log(token, user)
   const [input, setInput] = useState();
-
 
   const config = {
     headers: {
@@ -18,13 +18,14 @@ function Login() {
     }
   }
   useEffect(() => {
-    if(token){
+    if (token) {
       axios.get(BASE_URL + "user", config)
-      .then((response) =>{
-        console.log(response.data.data.data)
-        dispatch(storeUser(response.data.data.data))
-      })
-      .catch((error) =>console.log(error))
+        .then((response) => {
+          console.log(response.data.data.data)
+          dispatch(storeUser(response.data.data.data))
+          navigate("/blogs/weekend-reads")
+        })
+        .catch((error) => console.log(error))
     }
   }, [token]);
 
