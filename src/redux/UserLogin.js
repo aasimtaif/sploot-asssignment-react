@@ -28,6 +28,8 @@ export const userSlice = createSlice({
             state.user = null
             state.token = null
             localStorage.removeItem("user");
+            localStorage.removeItem("token");
+
         }
 
     },

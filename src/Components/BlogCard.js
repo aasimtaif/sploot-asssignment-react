@@ -8,10 +8,11 @@ console.log(blog.description)
         <div className="blog-card">
             <Grid.Col md={3} xs={6} sm={4} lg={1}>
             
-            <a href={blog.redirectUrl} target="_blank">
+            <a href={blog.redirectUrl}>
                 <div className="blog-img">
                     <img style={{ width: 340, margin: 'auto' }}
                         src={blog.imageUrl}
+                        alt='blog img'
                     />
                 </div>
                 <div className="blog-details">

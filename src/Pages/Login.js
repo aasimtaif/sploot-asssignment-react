@@ -13,27 +13,32 @@ function Login() {
   const { token, user } = useSelector((state) => state.user)
   // console.log(token)
   const [input, setInput] = useState();
-  const [message, setMessage] = useState()
+  const [message, setMessage] = useState({ success: null, error: null })
   const config = {
     headers: {
       Authorization: `Bearer ${token}`
     }
   }
   useEffect(() => {
+
     if (token) {
       axios.get(BASE_URL + "user", config)
         .then((response) => {
           console.log(response.data.data.data)
-          
-          setMessage("you are successfully logged in")
-          
+
+          setMessage({ success: "you are successfully logged in" })
+
           setTimeout(() => {
             dispatch(storeUser(response.data.data.data))
             navigate("/blogs");
-        }, 2000);
+          }, 2000);
         })
-        .catch((error) => console.log(error))
-       
+        .catch((error) => {
+          console.log(error)
+          setMessage({ error: "Incorrect Email/password" })
+
+        })
+
 
     }
   }, [token]);
@@ -41,9 +46,7 @@ function Login() {
   const handleInput = (e) => {
     const name = e.target.name
     const value = e.target.value
-
     setInput({ ...input, [name]: value })
-
   }
 
   const handleSubmit = async () => {
@@ -55,33 +58,34 @@ function Login() {
       // console.log(response)
     } catch (err) {
       console.log(err)
+      setMessage({ error: "Incorrect Email/password" })
     }
+    setInput(null)
   }
   // console.log(input)
   if (!user) {
     return (
       <div>
-        {message&&<Alert sx={{
-          minWidth: 30,
-          maxWidth: 300,
-          fontSize: 12,
-        }} variant="filled" severity="success">
-          {message}
+        {(message.error || message.success) && <Alert sx={{
+          minWidth: 30, 
+          maxWidth: 190,
+          fontSize: 10,
+        }} variant="filled" severity={message.error ? "error" : "success"}>
+          {message.error ? message.error : message.success}
         </Alert>}
         <div className="login-page">
           <div className="form">
             <form className="login-form">
-              <input type="email" name="username" placeholder="Email" onChange={(e) => { handleInput(e) }} />
-
-              <input type="password" placeholder="Password" name="password" onChange={(e) => { handleInput(e) }} />
+              <input  type="email" name="username" placeholder="Email" onChange={(e) => { handleInput(e) }} />
+              <input  type="password" placeholder="Password" name="password" onChange={(e) => { handleInput(e) }} />
               <button type="button" onClick={handleSubmit}>Login</button>
             </form>
           </div>
         </div>
       </div>
     )
-  }else{
-return"You are already logged in"
+  } else {
+    return "You are already logged in"
   }
 }
 

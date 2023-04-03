@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch ,useSelector} from 'react-redux';
 import { logOut } from '../redux/UserLogin';
 import { useNavigate } from 'react-router-dom';
-import { useParams } from 'react-router-dom'
 import { Categories, BlogsList } from '../Components'
 import { Button } from '@mantine/core';
 
@@ -12,7 +11,7 @@ function Blogs() {
   const dispatch = useDispatch()
   const { user } = useSelector((state) => state.user)
   // console.log(user)
-  const { slug } = useParams()
+
   useEffect(() => {
     if (!user) {
       navigate("/")
