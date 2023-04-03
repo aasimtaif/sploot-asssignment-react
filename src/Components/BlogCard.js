@@ -9,26 +9,26 @@ function BlogCard({ blog }) {
 
     return (
         <div className="blog-card">
-            <Card sx={{ maxWidth: 345 }}>
-                <a href={blog.redirectUrl} target="_blank"> 
-                    <CardMedia
-                        sx={{ height: 140 }}
-                        image={blog.imageUrl}
-                        title="green iguana"
+            
+            <a href={blog.redirectUrl} target="_blank">
+                <div className="blog-img">
+                    <img
+                        src={blog.imageUrl}
                     />
-                
+                </div>
+                <div className="blog-details">
 
-                <CardContent>
-                    <Typography gutterBottom variant="h8" component="div">
+                    <h5 >
                         {blog.title}
-                    </Typography>
-                    <Typography variant="body2" color="text.secondary">
+                    </h5>
+                    <p>
                         {blog.description}
-                    </Typography>
-                </CardContent>
-                </a>
-            </Card>
-        </div>
+                    </p>
+                </div>
+
+            </a>
+
+        </div >
     )
 }
 

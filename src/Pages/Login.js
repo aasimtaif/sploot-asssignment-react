@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { Alert } from '@mui/material';
 import axios from 'axios';
 import { useSelector, useDispatch } from 'react-redux'
 import { storeToken, storeUser } from '../redux/UserLogin';
@@ -10,9 +11,9 @@ function Login() {
   const navigate = useNavigate()
   const dispatch = useDispatch();
   const { token, user } = useSelector((state) => state.user)
-  console.log(token)
+  // console.log(token)
   const [input, setInput] = useState();
-
+  const [message, setMessage] = useState()
   const config = {
     headers: {
       Authorization: `Bearer ${token}`
@@ -23,10 +24,17 @@ function Login() {
       axios.get(BASE_URL + "user", config)
         .then((response) => {
           console.log(response.data.data.data)
-          dispatch(storeUser(response.data.data.data))
-          navigate("/blogs/weekend-reads")
+          
+          setMessage("you are successfully logged in")
+          
+          setTimeout(() => {
+            dispatch(storeUser(response.data.data.data))
+            navigate("/blogs");
+        }, 2000);
         })
         .catch((error) => console.log(error))
+       
+
     }
   }, [token]);
 
@@ -44,35 +52,38 @@ function Login() {
       const response = await axios.post(`${BASE_URL}auth/signin`,
         { "username": input.username, "password": input.password })
       dispatch(storeToken(response.data.data.data.authToken))
-      console.log(response)
+      // console.log(response)
     } catch (err) {
       console.log(err)
     }
   }
-  console.log(input)
-  return (
-    <div>
+  // console.log(input)
+  if (!user) {
+    return (
+      <div>
+        {message&&<Alert sx={{
+          minWidth: 30,
+          maxWidth: 300,
+          fontSize: 12,
+        }} variant="filled" severity="success">
+          {message}
+        </Alert>}
+        <div className="login-page">
+          <div className="form">
+            <form className="login-form">
+              <input type="email" name="username" placeholder="Email" onChange={(e) => { handleInput(e) }} />
 
-      <div className="login-page">
-        <div className="form">
-          <form className="login-form">
-            <input type="email" name="username" placeholder="Email" onChange={(e) => { handleInput(e) }} />
-
-            <input type="password" placeholder="Password" name="password" onChange={(e) => { handleInput(e) }} />
-            <button type="button" onClick={handleSubmit}>Login</button>
-          </form>
+              <input type="password" placeholder="Password" name="password" onChange={(e) => { handleInput(e) }} />
+              <button type="button" onClick={handleSubmit}>Login</button>
+            </form>
+          </div>
         </div>
       </div>
-
-      {/* 
-      <input type="email" name="username" onChange={(e) => { handleInput(e) }} />
-   
-      <input type="password" name="password" onChange={(e) => { handleInput(e) }} />
-      <br />
-      <button type="button" onClick={handleSubmit}>Login</button> */}
-
-    </div>
-  )
+    )
+  }else{
+return"You are already logged in"
+  }
 }
+
 
 export default Login
