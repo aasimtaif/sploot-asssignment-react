@@ -1,23 +1,20 @@
-import React from 'react'
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
-
-import Typography from '@mui/material/Typography';
+import React from 'react';
+import { Grid } from '@mantine/core';
 import "../Styles/Blog.css"
 function BlogCard({ blog }) {
-
+console.log(blog.description)
     return (
+
         <div className="blog-card">
+            <Grid.Col md={3} xs={6} sm={4} lg={1}>
             
             <a href={blog.redirectUrl} target="_blank">
                 <div className="blog-img">
-                    <img
+                    <img style={{ width: 340, margin: 'auto' }}
                         src={blog.imageUrl}
                     />
                 </div>
                 <div className="blog-details">
-
                     <h5 >
                         {blog.title}
                     </h5>
@@ -27,8 +24,10 @@ function BlogCard({ blog }) {
                 </div>
 
             </a>
-
+            
+        </Grid.Col>
         </div >
+
     )
 }
 

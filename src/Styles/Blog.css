@@ -1,15 +1,16 @@
 .blog-card{
     margin: auto;
+    
     padding: 1rem;
     text-align: left;
-    width: 100%;
+width: fit-content;
 }
 .blog-img{
     padding: 0;
 }
 img{
     border-radius: 5%;
-    max-width: 20%;
+    /* max-width: 20%; */
 }
 a{
     text-decoration: none;
@@ -28,6 +29,7 @@ h5{
     border: none;
     background-color: rgb(102, 102, 237);
 }
+
 
 /* .blogs-list{
     display: flex;

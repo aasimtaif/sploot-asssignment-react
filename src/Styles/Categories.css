@@ -5,6 +5,7 @@
   flex-direction: row;
   justify-content: space-evenly;
   overflow: scroll;
+  overflow-y: hidden;
   font-size: smaller;
   cursor: pointer; 
 

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import BlogCard from './BlogCard'
+import { Grid } from '@mantine/core';
 import "../Styles/Blog.css"
 function BlogsList({ slug }) {
   const [blogs, setBlogs] = useState([])
@@ -24,11 +25,11 @@ function BlogsList({ slug }) {
   }
 
   return (
-    <div>{blogs?.map((blog, index) => {
+    <Grid>{blogs?.map((blog, index) => {
       return <div className="blogs-list" key={index}>
         <BlogCard blog={blog} />
       </div>
-    })}</div>
+    })}</Grid>
   )
 }
 
